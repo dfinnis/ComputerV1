@@ -1,0 +1,2 @@
+- special cases
+	- all real numbers are solution
