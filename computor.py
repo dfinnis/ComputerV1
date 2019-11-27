@@ -44,15 +44,19 @@ def display(equation, degree, solution):
 
 def main():
     print("oh hi")#####
-    equation = parse_arg()
-    reduced = reduce(equation)
-    degree = find_degree(reduced)
-    solution = solve(reduced)
-    ## identify polynomial degree
-    ## find discriminant
-    ## find solution
-    display(reduced, degree, solution)
+    try:
+        equation = parse_arg()
+        reduced = reduce(equation)
+        degree = find_degree(reduced)
+        solution = solve(reduced)
+        ## find discriminant
+        display(reduced, degree, solution)
+    except:
+        print("Invalid Input")
     print("bye now")##
 
 if __name__ == '__main__':
     main()
+
+## to run:
+## python3 computor.py "$(< equations/0possible.txt)"

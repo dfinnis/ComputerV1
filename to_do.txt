@@ -1,2 +1,5 @@
 - special cases
 	- all real numbers are solution
+
+#### BONUS ####
+1. equations/ (example equations)
