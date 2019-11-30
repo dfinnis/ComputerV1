@@ -46,6 +46,15 @@ def main():
     print("oh hi")#####
     try:
         equation = parse_arg()
+
+        # equation.split("=")
+        # print(equation[0])
+        # print(equation[1])
+        # print("==============")
+        zero = 0
+        one = 0
+        two = 0
+        
         reduced = reduce(equation)
         degree = find_degree(reduced)
         solution = solve(reduced)
