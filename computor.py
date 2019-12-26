@@ -39,9 +39,11 @@ def find_degree(zero, one, two):
     else:
         return 2
 
-def solve_zero(equation):
-    solution = 0#######
-    print(solution)
+def solve_zero(zero):
+    if zero == 0:
+        print("The solution is: all real numbers")
+    else:
+        print("Equation unsolvable")
 
 def solve_one(equation):
     solution = 1#######
@@ -71,12 +73,25 @@ def solve(equation):
             one -= one_side
             two -= two_side
 
+        print("side:")
+        print(side)
+        print("-------------")
+        print(aN)
+        print(bN)
+        print(cN)
+        print("-------------")
+
+        print(a)
+        print(b)
+        print(c)
+        print("-------------")
+
     reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
     degree = find_degree(zero, one, two)
     print("Reduced form: " + reduced)
     print("Polynomial degree: " + str(degree))
     if degree == 0:
-        solve_zero(reduced)
+        solve_zero(zero)
     elif degree == 1:
         solve_one(reduced)
     else:
