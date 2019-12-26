@@ -13,6 +13,8 @@ def parse_arg():
 def parse_side(side):
     zero, one, two = 0, 0, 0
     for part in side:
+        # if part == "":
+        #     continue
         digit, Xpower = part.split("*")
         var, power = Xpower.split("^")
         power = float(power)
@@ -37,11 +39,23 @@ def find_degree(zero, one, two):
     else:
         return 2
 
-def parse_equation(equation):
+def solve_zero(equation):
+    solution = 0#######
+    print(solution)
+
+def solve_one(equation):
+    solution = 1#######
+    print(solution)
+
+def solve_two(equation):
+    solution = 2#######
+    discriminant = 42########
+    print(solution)
+
+def solve(equation):
     zero = 0
     one = 0
     two = 0
-
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
     if len(parts) != 2:
@@ -59,21 +73,26 @@ def parse_equation(equation):
 
     reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
     degree = find_degree(zero, one, two)
-    return reduced, degree
+    print("Reduced form: " + reduced)
+    print("Polynomial degree: " + str(degree))
+    if degree == 0:
+        solve_zero(reduced)
+    elif degree == 1:
+        solve_one(reduced)
+    else:
+        solve_two(reduced)
+
 
 # def find_discriminant(equation):
 # 	discriminant = 1
 # 	return discriminant
 
-def solve(equation):
-	solution = 0
-	return solution
 
-def display(reduced, degree, solution):
-    print("Reduced form: " + reduced)
-    print("Polynomial degree: " + str(degree))
+# def display(reduced, degree, solution, discriminant):
+#     print("Reduced form: " + reduced)
+#     print("Polynomial degree: " + str(degree))
 
-    # print("The solution is:")
+#     print("The solution is:")
     
     # print("Discriminant is strictly positive, the two solutions are:")
     # print(str(solution))
@@ -83,10 +102,7 @@ def display(reduced, degree, solution):
 def main():
     try:
         equation = parse_arg()
-        reduced, degree = parse_equation(equation)
-        solution = solve(reduced)
-        ## discriminant = find_discriminant(reduced)
-        display(reduced, degree, solution)
+        solve(equation)
     except:
         print("Invalid Input")
 
