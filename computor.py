@@ -1,9 +1,5 @@
 import argparse
 
-# def error_exit(err_msg):
-#     print('Error: {}' .format(err_msg))
-#     sys.exit()
-
 def parse_arg():
     my_parser = argparse.ArgumentParser(description="solves simple polynomial equations")
     my_parser.add_argument('Equation',
@@ -14,11 +10,35 @@ def parse_arg():
     equation = args.Equation
     return equation
 
+def parse_side(side):
+    zero, one, two = 0, 0, 0
+    for part in side:
+        # if part == "":
+        #     continue
+        digit, Xpower = part.split("*")
+        var, power = Xpower.split("^")
+        power = float(power)
+        if var != "X":
+            sys.exit()
+        if power == 0:
+            zero += float(digit)
+        elif power == 1:
+            one += float(digit)
+        elif power == 2:
+            two += float(digit)
+        else:
+            sys.exit("Wrong power")########?????????
+    return(zero, one, two)
+
 def reduce(equation):
+    zero = 0
+    one = 0
+    two = 0
     reduced = equation##########
-    # equation.split("=")
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
+    if len(parts) != 2:
+        sys.exit()
     print("equation:")    
     print(equation)
     print("parts:")    
@@ -28,9 +48,31 @@ def reduce(equation):
     print("1:")
     print(equation[1])
     print("==============")
-    zero = 0
-    one = 0
-    two = 0
+
+    for index, side in enumerate(parts):
+        zero_side, one_side, two_side = parse_side(side)
+        if index == 0:
+            zero += zero_side
+            one += one_side
+            two += two_side
+        else:
+            zero -= zero_side
+            one -= one_side
+            two -= two_side
+        print("side:")
+        print(side)
+        print("-------------")
+        print(zero_side)
+        print(one_side)
+        print(two_side)
+        print("-------------")
+
+        print(zero)
+        print(one)
+        print(two)
+        print("-------------")
+
+
     return reduced
 
 def find_degree(equation):
