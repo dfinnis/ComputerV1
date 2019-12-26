@@ -13,8 +13,6 @@ def parse_arg():
 def parse_side(side):
     zero, one, two = 0, 0, 0
     for part in side:
-        # if part == "":
-        #     continue
         digit, Xpower = part.split("*")
         var, power = Xpower.split("^")
         power = float(power)
@@ -27,10 +25,19 @@ def parse_side(side):
         elif power == 2:
             two += float(digit)
         else:
+            print("The polynomial degree is stricly greater than 2, I can't solve.")
             sys.exit()
     return(zero, one, two)
 
-def reduce(equation):
+def find_degree(zero, one, two):
+    if two == 0 and one == 0:
+        return 0
+    elif two == 0:
+        return 1
+    else:
+        return 2
+
+def parse_equation(equation):
     zero = 0
     one = 0
     two = 0
@@ -51,11 +58,8 @@ def reduce(equation):
             two -= two_side
 
     reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
-    return reduced
-
-def find_degree(equation):
-	degree = 0
-	return degree
+    degree = find_degree(zero, one, two)
+    return reduced, degree
 
 # def find_discriminant(equation):
 # 	discriminant = 1
@@ -67,8 +71,7 @@ def solve(equation):
 
 def display(reduced, degree, solution):
     print("Reduced form: " + reduced)
-
-    # print("Polynomial degree: " + str(degree))
+    print("Polynomial degree: " + str(degree))
 
     # print("The solution is:")
     
@@ -78,17 +81,14 @@ def display(reduced, degree, solution):
     # print("The polynomial degree is stricly greater than 2, I can't solve.")
 
 def main():
-    print("oh hi")#####
     try:
         equation = parse_arg()
-        reduced = reduce(equation)
-        degree = find_degree(reduced)
+        reduced, degree = parse_equation(equation)
         solution = solve(reduced)
         ## discriminant = find_discriminant(reduced)
         display(reduced, degree, solution)
     except:
         print("Invalid Input")
-    print("bye now")##
 
 if __name__ == '__main__':
     main()
