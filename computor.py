@@ -100,12 +100,12 @@ def print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps):
         print("side:", index + 1)
         print(side)
         print("-------------")
-        print("side reduced:")
+        print("side reduced")
         print("power zero:", zeroS)
         print("power one:", oneS)
         print("power two:", twoS)
         print("-------------")
-        print("cumulative total:")
+        print("cumulative total")
         print("power zero:", zero)
         print("power one:", one)
         print("power two:", two)
@@ -113,6 +113,8 @@ def print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps):
 
 def solve(equation, decimal, steps):
     zero, one, two = 0, 0, 0
+    if steps:
+        print("\nEquation before parsing: {}\n".format(equation))
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
     if len(parts) != 2:
