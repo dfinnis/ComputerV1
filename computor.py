@@ -1,6 +1,6 @@
 import argparse
 
-def parse_arg():
+def parse_args():
     my_parser = argparse.ArgumentParser(description="solves simple polynomial equations")
     my_parser.add_argument('Equation',
                        metavar='equation',
@@ -18,13 +18,11 @@ def parse_arg():
 def parse_side(side):
     zero, one, two = 0, 0, 0
     for part in side:
-        # if part == "":
-        #     continue
         digit, Xpower = part.split("*")
         var, power = Xpower.split("^")
         power = float(power)
         if var != "X":
-            print("Lexicon error. Variable not X: {}".format(var))
+            print("Lexicon error. Variable not X:", var)
             sys.exit()
         if power == 0:
             zero += float(digit)
@@ -33,7 +31,7 @@ def parse_side(side):
         elif power == 2:
             two += float(digit)
         else:
-            print("The polynomial degree is stricly greater than 2, I can't solve. Power: {}".format(int(power)))
+            print("The polynomial degree is stricly greater than 2, I can't solve. Power:", int(power))
             sys.exit()
     return(zero, one, two)
 
@@ -73,10 +71,10 @@ def solve_two(zero, one, two, decimal):
     solution = -one / (2 * two)
     if discriminant < 0:
         sqrt = square_root(-discriminant) / (2 * two)
-        print("Discriminant is strictly negative, the two solutions are:")
         if decimal != None:
             solution = "%.{}f".format(decimal) % solution
             sqrt = "%.{}f".format(decimal) % sqrt
+        print("Discriminant is strictly negative, the two solutions are:")
         print("{} + i * {}\n{} - i * {}".format(solution, sqrt, solution, sqrt))
     elif discriminant == 0:
         if decimal != None:
@@ -84,12 +82,12 @@ def solve_two(zero, one, two, decimal):
         print("Discriminant = 0, one double solution:", solution)
     else:
         sqrt = square_root(discriminant) / (2 * two)
-        print("Discriminant is strictly positive, the two solutions are:")
         solution1 = solution + sqrt
         solution2 = solution - sqrt
         if decimal != None:
             solution1 = "%.{}f".format(decimal) % solution1
             solution2 = "%.{}f".format(decimal) % solution2
+        print("Discriminant is strictly positive, the two solutions are:")    
         print("{}\n{}".format(solution1, solution2))
 
 def solve(equation, decimal):
@@ -134,7 +132,7 @@ def solve(equation, decimal):
 
 def main():
     try:
-        equation, decimal = parse_arg()
+        equation, decimal = parse_args()
         solve(equation, decimal)
     except:
         print("Invalid Input")
