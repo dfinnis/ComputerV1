@@ -24,6 +24,7 @@ def parse_side(side):
         var, power = Xpower.split("^")
         power = float(power)
         if var != "X":
+            print("Lexicon error. Variable not X: {}".format(var))
             sys.exit()
         if power == 0:
             zero += float(digit)
@@ -32,14 +33,14 @@ def parse_side(side):
         elif power == 2:
             two += float(digit)
         else:
-            print("The polynomial degree is stricly greater than 2, I can't solve.")
+            print("The polynomial degree is stricly greater than 2, I can't solve. Power: {}".format(int(power)))
             sys.exit()
     return(zero, one, two)
 
 def find_degree(zero, one, two):
-    if two == 0 and one == 0:
-        return 0
-    elif two == 0:
+    if two == 0:
+        if one == 0:
+            return 0
         return 1
     else:
         return 2
