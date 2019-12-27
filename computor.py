@@ -45,9 +45,8 @@ def solve_zero(zero):
     else:
         print("Equation unsolvable")
 
-def solve_one(equation):
-    solution = 1#######
-    print(solution)
+def solve_one(zero, one):
+    print("The solution is: ", -zero/one)
 
 def solve_two(equation):
     solution = 2#######
@@ -92,7 +91,7 @@ def solve(equation):
     if degree == 0:
         solve_zero(zero)
     elif degree == 1:
-        solve_one(reduced)
+        solve_one(zero, one)
     else:
         solve_two(reduced)
 
