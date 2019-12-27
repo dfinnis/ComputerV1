@@ -1,6 +1,7 @@
 #### BONUS ####
 1. equations/ (example equations)
-2. usage
-3. -d decimal places
-4. -b debug?
-5. error handling spaces, invalid variables, powers > 2
+2. -d decimal places
+3. -s steps
+4. error handling spaces
+	- messages invalid variables, powers > 2, invalid syntax (mutiple '=')
+5. usage

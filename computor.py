@@ -10,10 +10,15 @@ def parse_args():
                         '--decimal_places',
                         type=int,
                         help='set significant figures for displayed solution')
+    my_parser.add_argument('-s',
+                        '--steps',
+                        action='store_true',
+                        help='Display intermediate steps')
     args = my_parser.parse_args()
     equation = args.Equation
     decimal = args.decimal_places
-    return equation, decimal
+    steps = args.steps
+    return equation, decimal, steps
 
 def parse_side(side):
     zero, one, two = 0, 0, 0
@@ -90,35 +95,40 @@ def solve_two(zero, one, two, decimal):
         print("Discriminant is strictly positive, the two solutions are:")    
         print("{}\n{}".format(solution1, solution2))
 
-def solve(equation, decimal):
+def print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps):
+    if steps:
+        print("side:", index + 1)
+        print(side)
+        print("-------------")
+        print("side reduced:")
+        print("power zero:", zeroS)
+        print("power one:", oneS)
+        print("power two:", twoS)
+        print("-------------")
+        print("cumulative total:")
+        print("power zero:", zero)
+        print("power one:", one)
+        print("power two:", two)
+        print("=============\n")
+
+def solve(equation, decimal, steps):
     zero, one, two = 0, 0, 0
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
     if len(parts) != 2:
+        print("Syntax error. Number of '=':", len(parts) - 1)
         sys.exit()
     for index, side in enumerate(parts):
-        zero_side, one_side, two_side = parse_side(side)
+        zeroS, oneS, twoS = parse_side(side)
         if index == 0:
-            zero += zero_side
-            one += one_side
-            two += two_side
+            zero += zeroS
+            one += oneS
+            two += twoS
         else:
-            zero -= zero_side
-            one -= one_side
-            two -= two_side
-
-        # print("side: {}".format(index))
-        # print(side)
-        # print("-------------")
-        # print(zero)
-        # print(one)
-        # print(two)
-        # print("-------------")
-        # print(zero_side)
-        # print(one_side)
-        # print(two_side)
-        # print("-------------")
-
+            zero -= zeroS
+            one -= oneS
+            two -= twoS
+        print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps)
     reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
     degree = find_degree(zero, one, two)
     print("Reduced form: " + reduced)
@@ -132,8 +142,8 @@ def solve(equation, decimal):
 
 def main():
     try:
-        equation, decimal = parse_args()
-        solve(equation, decimal)
+        equation, decimal, steps = parse_args()
+        solve(equation, decimal, steps)
     except:
         print("Invalid Input")
 
