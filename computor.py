@@ -6,9 +6,14 @@ def parse_arg():
                        metavar='equation',
                        type=str,
                        help='provide a simple polynomial equation')
+    my_parser.add_argument('-s',
+                        '--significant_figures',
+                        type=int,
+                        help='set significant figures for displayed solution')
     args = my_parser.parse_args()
     equation = args.Equation
-    return equation
+    sig_fig = args.significant_figures
+    return equation, sig_fig
 
 def parse_side(side):
     zero, one, two = 0, 0, 0
@@ -45,8 +50,11 @@ def solve_zero(zero):
     else:
         print("Equation unsolvable")
 
-def solve_one(zero, one):
-    print("The solution is:\n{}".format(-zero/one))
+def solve_one(zero, one, sig_fig):
+    solution = -zero/one
+    if sig_fig != None:
+        solution = "%.{}f".format(sig_fig) % solution
+    print("The solution is:\n{}".format(solution))
 
 def square_root(n):
     mn = 0
@@ -59,21 +67,31 @@ def square_root(n):
             mx = mid
     return mx
 
-def solve_two(zero, one, two):
+def solve_two(zero, one, two, sig_fig):
     discriminant = one*one - 4*two*zero
     solution = -one / (2 * two)
     if discriminant < 0:
         sqrt = square_root(-discriminant) / (2 * two)
         print("Discriminant is strictly negative, the two solutions are:")
+        if sig_fig != None:
+            solution = "%.{}f".format(sig_fig) % solution
+            sqrt = "%.{}f".format(sig_fig) % sqrt
         print("{} + i * {}\n{} - i * {}".format(solution, sqrt, solution, sqrt))
     elif discriminant == 0:
+        if sig_fig != None:
+            solution = "%.{}f".format(sig_fig) % solution
         print("Discriminant = 0, one double solution:", solution)
     else:
         sqrt = square_root(discriminant) / (2 * two)
         print("Discriminant is strictly positive, the two solutions are:")
-        print("{}\n{}".format(solution + sqrt, solution - sqrt))
+        solution1 = solution + sqrt
+        solution2 = solution - sqrt
+        if sig_fig != None:
+            solution1 = "%.{}f".format(sig_fig) % solution1
+            solution2 = "%.{}f".format(sig_fig) % solution2
+        print("{}\n{}".format(solution1, solution2))
 
-def solve(equation):
+def solve(equation, sig_fig):
     zero, one, two = 0, 0, 0
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
@@ -109,14 +127,14 @@ def solve(equation):
     if degree == 0:
         solve_zero(zero)
     elif degree == 1:
-        solve_one(zero, one)
+        solve_one(zero, one, sig_fig)
     else:
-        solve_two(zero, one, two)
+        solve_two(zero, one, two, sig_fig)
 
 def main():
     try:
-        equation = parse_arg()
-        solve(equation)
+        equation, sig_fig = parse_arg()
+        solve(equation, sig_fig)
     except:
         print("Invalid Input")
 

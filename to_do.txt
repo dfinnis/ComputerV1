@@ -2,3 +2,5 @@
 1. equations/ (example equations)
 2. usage
 3. -d debug?
+4. -s significant figures?
+5. error handling spaces, invalid variables, powers > 2
