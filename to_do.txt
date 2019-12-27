@@ -1,6 +1,4 @@
-- special cases
-	- all real numbers are solution
-
 #### BONUS ####
 1. equations/ (example equations)
 2. usage
+3. -d debug?
