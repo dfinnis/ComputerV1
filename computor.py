@@ -6,14 +6,14 @@ def parse_arg():
                        metavar='equation',
                        type=str,
                        help='provide a simple polynomial equation')
-    my_parser.add_argument('-s',
-                        '--significant_figures',
+    my_parser.add_argument('-d',
+                        '--decimal_places',
                         type=int,
                         help='set significant figures for displayed solution')
     args = my_parser.parse_args()
     equation = args.Equation
-    sig_fig = args.significant_figures
-    return equation, sig_fig
+    decimal = args.decimal_places
+    return equation, decimal
 
 def parse_side(side):
     zero, one, two = 0, 0, 0
@@ -50,10 +50,10 @@ def solve_zero(zero):
     else:
         print("Equation unsolvable")
 
-def solve_one(zero, one, sig_fig):
+def solve_one(zero, one, decimal):
     solution = -zero/one
-    if sig_fig != None:
-        solution = "%.{}f".format(sig_fig) % solution
+    if decimal != None:
+        solution = "%.{}f".format(decimal) % solution
     print("The solution is:\n{}".format(solution))
 
 def square_root(n):
@@ -67,31 +67,31 @@ def square_root(n):
             mx = mid
     return mx
 
-def solve_two(zero, one, two, sig_fig):
+def solve_two(zero, one, two, decimal):
     discriminant = one*one - 4*two*zero
     solution = -one / (2 * two)
     if discriminant < 0:
         sqrt = square_root(-discriminant) / (2 * two)
         print("Discriminant is strictly negative, the two solutions are:")
-        if sig_fig != None:
-            solution = "%.{}f".format(sig_fig) % solution
-            sqrt = "%.{}f".format(sig_fig) % sqrt
+        if decimal != None:
+            solution = "%.{}f".format(decimal) % solution
+            sqrt = "%.{}f".format(decimal) % sqrt
         print("{} + i * {}\n{} - i * {}".format(solution, sqrt, solution, sqrt))
     elif discriminant == 0:
-        if sig_fig != None:
-            solution = "%.{}f".format(sig_fig) % solution
+        if decimal != None:
+            solution = "%.{}f".format(decimal) % solution
         print("Discriminant = 0, one double solution:", solution)
     else:
         sqrt = square_root(discriminant) / (2 * two)
         print("Discriminant is strictly positive, the two solutions are:")
         solution1 = solution + sqrt
         solution2 = solution - sqrt
-        if sig_fig != None:
-            solution1 = "%.{}f".format(sig_fig) % solution1
-            solution2 = "%.{}f".format(sig_fig) % solution2
+        if decimal != None:
+            solution1 = "%.{}f".format(decimal) % solution1
+            solution2 = "%.{}f".format(decimal) % solution2
         print("{}\n{}".format(solution1, solution2))
 
-def solve(equation, sig_fig):
+def solve(equation, decimal):
     zero, one, two = 0, 0, 0
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
@@ -127,14 +127,14 @@ def solve(equation, sig_fig):
     if degree == 0:
         solve_zero(zero)
     elif degree == 1:
-        solve_one(zero, one, sig_fig)
+        solve_one(zero, one, decimal)
     else:
-        solve_two(zero, one, two, sig_fig)
+        solve_two(zero, one, two, decimal)
 
 def main():
     try:
-        equation, sig_fig = parse_arg()
-        solve(equation, sig_fig)
+        equation, decimal = parse_arg()
+        solve(equation, decimal)
     except:
         print("Invalid Input")
 
