@@ -69,9 +69,19 @@ def find_reduced(degree, zero, one, two):
     if degree == 0:
         reduced = "{} = 0".format(zero)
     elif degree == 1:
-        reduced = "{} + {} * X^1 = 0".format(zero, one)
+        if zero == 0:
+            reduced = "{} * X^1 = 0".format(one)
+        else:
+            reduced = "{} + {} * X^1 = 0".format(zero, one)
     else:
-        reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
+        if zero == 0 and one == 0:
+            reduced = "{} * X^2 = 0".format(two)
+        elif zero == 0:
+            reduced = "{} * X^1 + {} * X^2 = 0".format(one, two)
+        elif one == 0:
+            reduced = "{} + {} * X^2 = 0".format(zero, two)
+        else:
+            reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
     return reduced
 
 def solve_zero(zero):
