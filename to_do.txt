@@ -1,10 +1,12 @@
-To do:
-natural form
-
 #### BONUS ####
-1. equations/ (example equations)
-2. -d decimal places
-3. -s steps
-4. error handling spaces
-	- messages invalid variables, powers > 2, invalid syntax (mutiple '=')
-5. usage
+1. -n Manage entry in natural form
+2. -d Decimal places
+3. -s Steps
+4. -h Help, usage
+5. equations/ (example equations)
+6. error
+	- handling spaces
+	- messages
+		- invalid variables
+		- powers > 2
+		- invalid syntax (mutiple '=')

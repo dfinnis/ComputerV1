@@ -15,11 +15,39 @@ def parse_args():
                         '--steps',
                         action='store_true',
                         help='Display intermediate steps')
+    my_parser.add_argument('-n',
+                        '--natural',
+                        action='store_true',
+                        help='Manage entry in natural form')
     args = my_parser.parse_args()
     equation = args.Equation
     decimal = args.decimal_places
     steps = args.steps
-    return equation, decimal, steps
+    natural = args.natural
+    return equation, decimal, steps, natural
+
+def denaturalize(equation, natural):
+    if natural:
+        denaturalized = ""
+        equation = equation.replace(" ", "").replace("-", "+-").split("=")
+        parts = [equation[i].split("+") for i in range(len(equation))]
+        for index, side in enumerate(parts):
+            for part in side:
+                if "*" not in part:
+                    if "X" in part:
+                        part = "1 * " + part ## (for "X" and "X^2")
+                        if "^" not in part:
+                            part = part + "^1" ## (for "X")
+                    else:
+                        part = part + "* X^0" ## (for "4")
+                elif "^" not in part:
+                    part = part + "^1" ## (for "4 * X")
+                denaturalized = denaturalized + part + " + "
+            denaturalized = denaturalized[:-3]
+            if index == 0:
+                denaturalized = denaturalized + " = "
+        return denaturalized
+    return equation
 
 def parse_side(side):
     zero, one, two = 0, 0, 0
@@ -131,8 +159,9 @@ def solve_two(zero, one, two, decimal):
         print("Discriminant is strictly positive, the two solutions are:")    
         print("{}\n{}".format(solution1, solution2))
 
-def solve(equation, decimal, steps):
+def solve(equation, decimal, steps, natural):
     zero, one, two = 0, 0, 0
+    equation = denaturalize(equation, natural)
     if steps:
         print("\nEquation before parsing: {}\n".format(equation))
     equation = equation.replace(" ", "").replace("-", "+-").split("=")
@@ -164,8 +193,8 @@ def solve(equation, decimal, steps):
 
 def main():
     try:
-        equation, decimal, steps = parse_args()
-        solve(equation, decimal, steps)
+        equation, decimal, steps, natural = parse_args()
+        solve(equation, decimal, steps, natural)
     except:
         print("Invalid Input")
 
