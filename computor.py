@@ -164,7 +164,7 @@ def solve(equation, decimal, steps, natural):
     equation = denaturalize(equation, natural)
     if steps:
         print("\nEquation before parsing: {}\n".format(equation))
-    equation = equation.replace(" ", "").replace("-", "+-").split("=")
+    equation = equation.replace("- ", "+-").replace(" ", "").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
     if len(parts) != 2:
         print("Syntax error. Number of '=':", len(parts) - 1)
