@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 def parse_args():
     my_parser = argparse.ArgumentParser(description="solves simple polynomial equations")
@@ -40,6 +41,22 @@ def parse_side(side):
             sys.exit()
     return(zero, one, two)
 
+def print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps):
+    if steps:
+        print("side:", index + 1)
+        print(side)
+        print("-------------")
+        print("side reduced")
+        print("power zero:", zeroS)
+        print("power one:", oneS)
+        print("power two:", twoS)
+        print("-------------")
+        print("cumulative total")
+        print("power zero:", zero)
+        print("power one:", one)
+        print("power two:", two)
+        print("=============\n")
+
 def find_degree(zero, one, two):
     if two == 0:
         if one == 0:
@@ -47,6 +64,15 @@ def find_degree(zero, one, two):
         return 1
     else:
         return 2
+
+def find_reduced(degree, zero, one, two):
+    if degree == 0:
+        reduced = "{} = 0".format(zero)
+    elif degree == 1:
+        reduced = "{} + {} * X^1 = 0".format(zero, one)
+    else:
+        reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
+    return reduced
 
 def solve_zero(zero):
     if zero == 0:
@@ -95,22 +121,6 @@ def solve_two(zero, one, two, decimal):
         print("Discriminant is strictly positive, the two solutions are:")    
         print("{}\n{}".format(solution1, solution2))
 
-def print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps):
-    if steps:
-        print("side:", index + 1)
-        print(side)
-        print("-------------")
-        print("side reduced")
-        print("power zero:", zeroS)
-        print("power one:", oneS)
-        print("power two:", twoS)
-        print("-------------")
-        print("cumulative total")
-        print("power zero:", zero)
-        print("power one:", one)
-        print("power two:", two)
-        print("=============\n")
-
 def solve(equation, decimal, steps):
     zero, one, two = 0, 0, 0
     if steps:
@@ -131,8 +141,8 @@ def solve(equation, decimal, steps):
             one -= oneS
             two -= twoS
         print_steps(index, side, zeroS, oneS, twoS, zero, one, two, steps)
-    reduced = "{} + {} * X^1 + {} * X^2 = 0".format(zero, one, two)
     degree = find_degree(zero, one, two)
+    reduced = find_reduced(degree, zero, one, two)
     print("Reduced form: " + reduced)
     print("Polynomial degree: " + str(degree))
     if degree == 0:

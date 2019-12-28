@@ -1,3 +1,6 @@
+To do:
+natural form
+
 #### BONUS ####
 1. equations/ (example equations)
 2. -d decimal places
