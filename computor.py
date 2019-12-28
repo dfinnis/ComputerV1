@@ -29,7 +29,7 @@ def parse_args():
 def denaturalize(equation, natural):
     if natural:
         denaturalized = ""
-        equation = equation.replace(" ", "").replace("-", "+-").split("=")
+        equation = equation.replace("- ", "+-").replace(" ", "").split("=")
         parts = [equation[i].split("+") for i in range(len(equation))]
         for index, side in enumerate(parts):
             for part in side:
