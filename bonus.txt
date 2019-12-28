@@ -4,9 +4,10 @@
 3. -s Steps
 4. -h Help, usage
 5. equations/ (example equations)
-6. error
-	- handling spaces
-	- messages
+6. Manage input errors, & print error messages
+	- syntax
+		- spaces
+		- mutiple '='
+	- lexicon
 		- invalid variables
 		- powers > 2
-		- invalid syntax (mutiple '=')
