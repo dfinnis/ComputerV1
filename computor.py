@@ -56,7 +56,7 @@ def parse_side(side):
         var, power = Xpower.split("^")
         power = float(power)
         if var != "X":
-            print("Lexicon error. Variable not X:", var)
+            print("Lexicon error. Variable not X: {}".format(var))
             sys.exit()
         if power == 0:
             zero += float(digit)
@@ -65,7 +65,7 @@ def parse_side(side):
         elif power == 2:
             two += float(digit)
         else:
-            print("The polynomial degree is stricly greater than 2, I can't solve. Power:", int(power))
+            print("The polynomial degree is stricly greater than 2, I can't solve. Power: {}".format(int(power)))
             sys.exit()
     return(zero, one, two)
 
@@ -148,7 +148,7 @@ def solve_two(zero, one, two, decimal):
     elif discriminant == 0:
         if decimal != None:
             solution = "%.{}f".format(decimal) % solution
-        print("Discriminant = 0, one double solution:", solution)
+        print("Discriminant = 0, one double solution: {}".format(solution))
     else:
         sqrt = square_root(discriminant) / (2 * two)
         solution1 = solution + sqrt
@@ -167,7 +167,7 @@ def solve(equation, decimal, steps, natural):
     equation = equation.replace("- ", "+-").replace(" ", "").split("=")
     parts = [equation[i].split("+") for i in range(len(equation))]
     if len(parts) != 2:
-        print("Syntax error. Number of '=':", len(parts) - 1)
+        print("Syntax error. Number of '=': {}".format(len(parts) - 1))
         sys.exit()
     for index, side in enumerate(parts):
         zeroS, oneS, twoS = parse_side(side)
