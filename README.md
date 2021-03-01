@@ -2,7 +2,7 @@
 
 #### Final Score 125/100
 
-A program that solves polynomial equations.
+A python polynomial equation solver.
 
 ### Requirements:
 
