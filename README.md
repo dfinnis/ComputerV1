@@ -4,7 +4,7 @@ A python polynomial equation solver.
 
 #### Final Score 125/100
 
-### Requirements:
+## Requirements
 
 Handle polynomial equations of degree <= 2.
 
