@@ -1,8 +1,8 @@
 # ComputerV1
 
-#### Final Score 125/100
-
 A python polynomial equation solver.
+
+#### Final Score 125/100
 
 ### Requirements:
 
