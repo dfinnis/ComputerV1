@@ -23,7 +23,7 @@ First clone this repo to your machine.
 
 Then run with equation as argument. ```python3 computor.py "0 * X^0 = 1 * X^1"```
 
-<img src="https://github.com/dfinnis/ComputerV1/blob/master/example.png">
+<img src="https://github.com/dfinnis/ComputerV1/blob/master/img/example.png">
 
 You can find some example equation files in the ```equations/``` folder.
 You can also run an example file directly using ```python3 computor.py "$(< equations/1.txt)"```
