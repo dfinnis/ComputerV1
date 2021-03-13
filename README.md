@@ -2,9 +2,7 @@
 
 A python polynomial equation solver.
 
-#### Final Score 125/100
-
-## Requirements
+### Requirements
 
 Handle polynomial equations of degree <= 2.
 
@@ -15,6 +13,9 @@ For a given equation display:
 * Degree
 * Solution(s)
 * Sign of the discriminant when it makes sense
+
+#### Final Score 125/100
+
 
 ## Getting Started
 
