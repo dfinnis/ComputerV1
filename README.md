@@ -19,20 +19,16 @@ For a given equation display:
 
 ## Getting Started
 
-First clone this repo to your machine.
-
+First clone this repo. <br>
 ```git clone https://github.com/dfinnis/ComputerV1.git```
 
-Then run with equation as argument.
-
+Then run with equation as argument. <br>
 ```python3 computor.py "0 * X^0 = 1 * X^1"```
 
 <img src="https://github.com/dfinnis/ComputerV1/blob/master/img/example.png" width="640">
 
-You can find some example equation files in the ```equations/``` folder.
-You can also run an example file directly.
-
-```python3 computor.py "$(< equations/1.txt)"```
+You can find some example equation files in the *equations/* folder. You can also run an example file directly. <br>
+```python3 computor.py "$(< equations/2positive.txt)"```
 
 <img src="https://github.com/dfinnis/ComputerV1/blob/master/img/file.png" width="640">
 
