@@ -14,7 +14,9 @@ For a given equation display:
 * Solution(s)
 * Sign of the discriminant when it makes sense
 
-#### Final Score 125/100
+See the [subject](https://github.com/dfinnis/ComputerV1/blob/master/subject.pdf) for more details.
+
+*Final Score 125/100*
 
 
 ## Getting Started
